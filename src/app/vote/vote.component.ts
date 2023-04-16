@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { CandidatesService } from '../services/candidates.service';
 import { Candidate } from '../models/candidate';
 import { Voter } from '../models/voter';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vote',
@@ -13,7 +14,8 @@ import { Voter } from '../models/voter';
 export class VoteComponent implements OnInit {
   constructor(
     private votersAPI: VotersService,
-    private candidatesAPI: CandidatesService
+    private candidatesAPI: CandidatesService,
+    private router: Router
   ) {}
 
   candidates: Candidate[] = [];
@@ -112,6 +114,7 @@ export class VoteComponent implements OnInit {
             .updateVotes(candidate.id, candidate.votes + 1)
             .subscribe((res: any) => {
               console.log(res);
+              this.router.navigate(['/done']);
             });
         });
       }

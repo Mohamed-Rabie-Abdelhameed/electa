@@ -7,13 +7,15 @@ import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from './navbar/navbar.component';
 import { VoteComponent } from './vote/vote.component';
 import { CandidatesComponent } from './candidates/candidates.component';
+import { DoneComponent } from './done/done.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     VoteComponent,
-    CandidatesComponent
+    CandidatesComponent,
+    DoneComponent
   ],
   imports: [
     BrowserModule,
