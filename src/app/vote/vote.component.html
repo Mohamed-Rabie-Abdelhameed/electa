@@ -1,0 +1,97 @@
+<div class="out">
+  <div class="col-md-12" id="container">
+    <form #voterForm="ngForm" (ngSubmit)="onVote(voterForm.value)">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          required
+          placeholder="enter your name"
+          type="text"
+          name="name"
+          id="name"
+          ngModel
+        />
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          required
+          placeholder="enter your email"
+          type="email"
+          name="email"
+          id="email"
+          ngModel
+        />
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone</label>
+        <input
+          required
+          placeholder="enter your phone"
+          type="text"
+          name="phone"
+          id="phone"
+          ngModel
+        />
+      </div>
+      <!-- ssn -->
+      <div class="form-group">
+        <label for="ssn">SSN</label>
+        <input
+          required
+          placeholder="enter your ssn"
+          type="number"
+          name="ssn"
+          id="ssn"
+          ngModel
+        />
+      </div>
+      <div class="form-group">
+        <label for="city">City</label>
+        <input
+          required
+          placeholder="enter your city"
+          type="text"
+          name="city"
+          id="city"
+          ngModel
+        />
+      </div>
+      <div class="form-group">
+        <label for="dob">Date of Birth</label>
+        <input
+          required
+          placeholder="enter your dob"
+          type="date"
+          name="dob"
+          id="dob"
+          ngModel
+        />
+      </div>
+      <!-- candidate -->
+        <!-- get the values for options from the candidates array -->
+        <div class="form-group">
+            <label for="candidate">Candidate</label>
+            <select
+                required
+                name="candidate"
+                id="candidate"
+                ngModel
+            >
+                <option value="" disabled selected>Select Candidate</option>
+            
+                <option *ngFor="let candidate of candidates" [value]="candidate">
+                {{ candidate }}
+                </option>
+            </select>
+        </div>
+      <button
+        class="btn btn-primary"
+        type="submit"
+        [disabled]="voterForm.invalid"
+      >
+        Vote
+      </button>
+    </form>
+  </div>
+</div>

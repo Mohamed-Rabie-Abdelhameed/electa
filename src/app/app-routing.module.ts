@@ -1,7 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { VoteComponent } from './vote/vote.component';
+import { CandidatesComponent } from './candidates/candidates.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  { path: '', redirectTo: '/vote', pathMatch: 'full' },
+  { path: 'vote', component: VoteComponent },
+  { path: 'candidates', component: CandidatesComponent},
+  { path: '**', redirectTo: '/vote' }
+
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
