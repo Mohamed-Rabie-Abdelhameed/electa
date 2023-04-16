@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { VotersService } from '../services/voters.service';
 import { NgForm } from '@angular/forms';
 import { CandidatesService } from '../services/candidates.service';
+import { Candidate } from '../models/candidate';
+import { Voter } from '../models/voter';
 
 @Component({
   selector: 'app-vote',
@@ -14,7 +16,7 @@ export class VoteComponent implements OnInit {
     private candidatesAPI: CandidatesService
   ) {}
 
-  candidates: any = [];
+  candidates: Candidate[] = [];
   states: string[] = [
     'Alabama',
     'Alaska',
@@ -69,36 +71,56 @@ export class VoteComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    this.candidatesAPI.getCandidates().subscribe((res: any) => {
+    this.candidatesAPI.getCandidates().subscribe((res: Candidate[]) => {
       this.candidates = res;
+      console.log(this.candidates);
     });
   }
 
   @ViewChild('voterForm')
   voterForm!: NgForm;
 
-  onVote(voter: {
-    name: string;
-    email: string;
-    ssn: string;
-    dob: Date;
-    city: string;
-    phone: string;
-    votedFor: string;
+  onSubmit(voter:{
+    name:string,
+    email:string, 
+    phone: string,
+    ssn:string,
+    state:string,
+    dob: Date,
+    candidate:string
   }) {
-    this.votersAPI.hasVoted(voter).subscribe((res: any) => {
+    var newVoter: Voter = {
+      name: voter.name,
+      email: voter.email,
+      ssn: voter.ssn,
+      phone: voter.phone,
+      state: voter.state,
+      dob: voter.dob,
+      votedFor:voter.candidate,
+    }
+    this.votersAPI.hasVoted(newVoter).subscribe((res: boolean) => {
       if (res) {
         alert('You have already voted!');
       } else {
-        if(voter.ssn.length !== 9) {
-          alert('SSN must be 9 digits long!');
-          return;
-        }
-        this.votersAPI.createVoter(voter).subscribe((res: any) => {
-          console.log(res);
+        console.log(newVoter.votedFor)
+        const candidate = this.findCandidate(newVoter.votedFor);
+        console.log(candidate);
+        this.votersAPI.createVoter(newVoter).subscribe((res: any) => {
           this.voterForm.reset();
+          console.log(candidate.id);
+          this.candidatesAPI
+            .updateVotes(candidate.id, candidate.votes + 1)
+            .subscribe((res: any) => {
+              console.log(res);
+            });
         });
       }
     });
+  }
+
+  findCandidate(name: string): Candidate {
+    return (
+      this.candidates.find((candidate) => candidate.name === name)
+    );
   }
 }

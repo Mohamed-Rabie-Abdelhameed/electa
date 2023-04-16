@@ -4,7 +4,7 @@ export class Voter {
   email!: string;
   ssn!: string;
   dob!: Date;
-  city!: string;
+  state!: string;
   phone!: string;
   votedFor!: string;
 }

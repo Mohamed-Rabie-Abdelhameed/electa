@@ -38,7 +38,7 @@ label {
   font-weight: bold;
   margin: 10px;
 }
-input:focus {
+select:focus, input:focus {
   outline: none;
   box-shadow: 0 0 5px #4b69ec;
 }
@@ -57,7 +57,7 @@ input:focus {
   width: 80%;
   height: 50px;
   max-width: 400px;
-  margin-top: 20px;
+  margin-top: 10px;
   background-color: #4b69ec;
 }
 

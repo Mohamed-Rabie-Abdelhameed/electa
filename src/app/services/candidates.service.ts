@@ -25,8 +25,8 @@ export class CandidatesService {
         })
       );
   }
-  
-  getCandidate(id: string) {
-    return this.http.get(`${this.url}/candidates/${id}.json`);
+
+  updateVotes(id:string, votes: number) {
+    return this.http.patch(`${this.url}/candidates/${id}.json`, {votes});
   }
 }

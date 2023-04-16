@@ -1,6 +1,6 @@
 <div class="out">
   <div class="col-md-12" id="container">
-    <form #voterForm="ngForm" (ngSubmit)="onVote(voterForm.value)">
+    <form #voterForm="ngForm" (ngSubmit)="onSubmit(voterForm.value)">
       <div class="form-group">
         <label for="name">Name</label>
         <input
@@ -34,7 +34,6 @@
           ngModel
         />
       </div>
-      <!-- ssn -->
       <div class="form-group">
         <label for="ssn">SSN</label>
         <input
@@ -46,16 +45,20 @@
           ngModel
         />
       </div>
+    
       <div class="form-group">
-        <label for="city">City</label>
-        <input
+        <label for="state">State</label>
+        <select
           required
-          placeholder="enter your city"
-          type="text"
-          name="city"
-          id="city"
+          name="state"
+          id="state"
           ngModel
-        />
+        >
+          <option value="" disabled selected>Select State</option>
+          <option *ngFor="let state of states" [value]="state">
+            {{ state }}
+          </option>
+        </select>
       </div>
       <div class="form-group">
         <label for="dob">Date of Birth</label>
@@ -68,8 +71,7 @@
           ngModel
         />
       </div>
-      <!-- candidate -->
-        <!-- get the values for options from the candidates array -->
+     
         <div class="form-group">
             <label for="candidate">Candidate</label>
             <select
@@ -80,8 +82,8 @@
             >
                 <option value="" disabled selected>Select Candidate</option>
             
-                <option *ngFor="let candidate of candidates" [value]="candidate">
-                {{ candidate }}
+                <option *ngFor="let candidate of candidates" [value]="candidate.name">
+                {{ candidate.name }}
                 </option>
             </select>
         </div>
