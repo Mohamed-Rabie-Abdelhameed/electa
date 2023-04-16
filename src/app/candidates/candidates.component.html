@@ -1,1 +1,15 @@
-<p>candidates works!</p>
+<div >
+    <div class="row">
+      <div class="card col-md-2" *ngFor="let candidate of candidates">
+        <img class="card-img-top" src="assets/images/user.png" alt="" />
+  
+        <div class="card-body">
+          <h5 class="card-title">{{ candidate.name }}</h5>
+            <h6 class="card-subtitle mb-2 ">{{ candidate.party }}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">{{ candidate.symbol }}</h6>
+            <p class="card-text">{{ candidate.votes }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  

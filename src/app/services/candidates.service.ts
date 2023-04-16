@@ -8,8 +8,8 @@ import { Candidate } from '../models/candidate';
 })
 export class CandidatesService {
   constructor(private http: HttpClient) { }
-
   private url = 'https://electa-1-default-rtdb.firebaseio.com/';
+
   getCandidates() {
     return this.http
       .get<{ [key: string]: Candidate }>(`${this.url}/candidates.json`)
